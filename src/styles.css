@@ -12,9 +12,67 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+.search-form {
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+  margin-bottom: 24px;
+}
 
-  /*
-   * CSS image reference example.
-   */
-  background-image: url('./images/bg-pattern.png');
+.input {
+  border-radius: 2px;
+  border: rgba(42, 230, 205, 0.986) solid 1px;
+  padding: 5px;
+}
+
+.button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: rgb(0, 13, 202);
+  border: rgba(42, 230, 205, 0.986) solid 1px;
+  color: rgb(123, 127, 131);
+}
+
+.is-hidden {
+  display: none;
+}
+
+.gallery {
+  /* position: relative; */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  max-width: calc(100vw - 80px);
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+}
+
+.gallery li {
+  height: 310px;
+  overflow: hidden;
+}
+
+.stats {
+  display: flex;
+  /* margin-right: 20px; */
+}
+
+.stats-item {
+  margin-right: 8px;
+}
+
+.gallery img {
+  height: 240px;
+}
+
+.spinner.is-hidden {
+  display: none;
 }
