@@ -63,6 +63,9 @@ function onLoadMore() {
     .then(images => {
       fetchImg.page += 1;
       const img = images.hits;
+      if (img.length < 12) {
+        refs.btnRef.classList.add('is-hidden');
+      }
       renderImage(img);
       window.scrollTo({
         top: document.documentElement.scrollHeight,
