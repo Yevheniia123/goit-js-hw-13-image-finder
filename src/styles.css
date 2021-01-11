@@ -30,11 +30,11 @@ body {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  border-radius: 20px;
+  border-radius: 5px;
   padding: 10px;
-  background-color: rgb(0, 13, 202);
+  background-color: rgb(70, 81, 235);
   border: rgba(42, 230, 205, 0.986) solid 1px;
-  color: rgb(123, 127, 131);
+  color: rgb(255, 255, 255);
 }
 
 .is-hidden {
@@ -75,4 +75,16 @@ body {
 
 .spinner.is-hidden {
   display: none;
+}
+.search-part {
+  display: flex;
+  align-items: baseline;
+  margin-left: 500px;
+}
+.search {
+  border-radius: 5px;
+  padding: 5px;
+  background-color: rgb(108, 116, 231);
+  border: rgba(42, 230, 205, 0.986) solid 1px;
+  color: rgb(255, 255, 255);
 }

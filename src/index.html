@@ -12,16 +12,21 @@
   </head>
 
   <body>
-    <form class="search-form" id="search-form">
-      <input
-        class="input"
-        type="text"
-        name="query"
-        autocomplete="off"
-        placeholder="Search images..."
-      />
-    </form>
+    <div class="search-part">
+      <form class="search-form" id="search-form">
+        <input
+          class="input"
+          type="text"
+          name="query"
+          autocomplete="off"
+          placeholder="Search images..."
+        />
+      </form>
+      <button type="button" class="search" data-action="search">search</button>
+    </div>
+
     <div class="gallery-item"></div>
+
     <button
       type="button"
       class="btn btn-primary button is-hidden"

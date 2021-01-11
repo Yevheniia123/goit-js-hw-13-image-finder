@@ -4,4 +4,5 @@ export default {
   inputRef: document.querySelector('.search-form input'),
   galleryItemRef: document.querySelector('.gallery-item'),
   spinnerRef: document.querySelector('#spinner'),
+  searchBtnRef: document.querySelector('.search'),
 };

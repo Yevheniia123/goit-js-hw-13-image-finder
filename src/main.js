@@ -5,19 +5,38 @@ import opts from './js/spinner.js';
 import fetchImg from './js/fetch.js';
 import refs from './js/refs.js';
 
-const debounce = require('lodash.debounce');
-
 let spinner = new Spinner(opts).spin(refs.spinnerRef);
 
-refs.formRef.addEventListener('input', debounce(findImages, 2000));
+refs.formRef.addEventListener('submit', findImages);
 refs.btnRef.addEventListener('click', onLoadMore);
+refs.searchBtnRef.addEventListener('click', findImagesBtn);
 
 function findImages(e) {
+  e.preventDefault();
   refs.galleryItemRef.innerHTML = '';
 
   fetchImg.resetPage();
 
-  fetchImg.searchQuery = e.target.value;
+  fetchImg.searchQuery = e.currentTarget.elements.query.value;
+
+  fetchImg
+    .fetchImages()
+    .then(images => {
+      fetchImg.page += 1;
+      const img = images.hits;
+      renderImage(img);
+      refs.btnRef.classList.remove('is-hidden');
+    })
+    .catch(error => error);
+}
+
+function findImagesBtn(e) {
+  e.preventDefault();
+  refs.galleryItemRef.innerHTML = '';
+
+  fetchImg.resetPage();
+
+  fetchImg.searchQuery = refs.inputRef.value;
 
   fetchImg
     .fetchImages()
@@ -37,17 +56,16 @@ function renderImage(images) {
 
 function onLoadMore() {
   fetchImg.searchQuery = refs.inputRef.value;
-
+  refs.spinnerRef.classList.remove('is-hidden');
+  refs.btnRef.classList.add('is-hidden');
   fetchImg
     .fetchImages()
     .then(images => {
-      refs.spinnerRef.classList.remove('is-hidden');
-      refs.btnRef.classList.add('is-hidden');
       fetchImg.page += 1;
       const img = images.hits;
       renderImage(img);
       window.scrollTo({
-        top: 1000000000000,
+        top: document.documentElement.scrollHeight,
         behavior: 'smooth',
       });
     })
