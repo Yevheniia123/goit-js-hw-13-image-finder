@@ -9,7 +9,6 @@ let spinner = new Spinner(opts).spin(refs.spinnerRef);
 
 refs.formRef.addEventListener('submit', findImages);
 refs.btnRef.addEventListener('click', onLoadMore);
-refs.searchBtnRef.addEventListener('click', findImagesBtn);
 
 function findImages(e) {
   e.preventDefault();
@@ -21,32 +20,18 @@ function findImages(e) {
 
   fetchImg
     .fetchImages()
-    .then(images => {
-      fetchImg.page += 1;
-      const img = images.hits;
-      renderImage(img);
-      refs.btnRef.classList.remove('is-hidden');
-    })
+    .then(showImages)
     .catch(error => error);
 }
 
-function findImagesBtn(e) {
-  e.preventDefault();
-  refs.galleryItemRef.innerHTML = '';
-
-  fetchImg.resetPage();
-
-  fetchImg.searchQuery = refs.inputRef.value;
-
-  fetchImg
-    .fetchImages()
-    .then(images => {
-      fetchImg.page += 1;
-      const img = images.hits;
-      renderImage(img);
-      refs.btnRef.classList.remove('is-hidden');
-    })
-    .catch(error => error);
+function showImages(images) {
+  fetchImg.page += 1;
+  const img = images.hits;
+  refs.btnRef.classList.remove('is-hidden');
+  if (img.length < 12) {
+    refs.btnRef.classList.add('is-hidden');
+  }
+  renderImage(img);
 }
 
 function renderImage(images) {
@@ -61,12 +46,7 @@ function onLoadMore() {
   fetchImg
     .fetchImages()
     .then(images => {
-      fetchImg.page += 1;
-      const img = images.hits;
-      if (img.length < 12) {
-        refs.btnRef.classList.add('is-hidden');
-      }
-      renderImage(img);
+      showImages(images);
       window.scrollTo({
         top: document.documentElement.scrollHeight,
         behavior: 'smooth',
@@ -75,6 +55,5 @@ function onLoadMore() {
     .catch(error => error)
     .finally(function () {
       refs.spinnerRef.classList.add('is-hidden');
-      refs.btnRef.classList.remove('is-hidden');
     });
 }
